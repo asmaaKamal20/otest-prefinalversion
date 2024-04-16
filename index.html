@@ -1,0 +1,1486 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>UTest-Test Anytime , Anywhere</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/icon" href="images/ClientLogo-icon.png" />
+  <!-- Font Awesome -->
+  <link href="css/font-awesome.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <!-- Logos slider -->
+ 
+  <!-- Fancybox slider -->
+  <link rel="stylesheet" href="css/jquery.fancybox.css" type="text/css" media="screen" />
+  <!-- Animate css -->
+  <link rel="stylesheet" type="text/css" href="css/animate.css" />
+  <!-- Theme color -->
+  <link id="switcher" href="css/theme-color/default-theme.css" rel="stylesheet">
+  <!-- Fontawsome -->
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <!-- Main Style -->
+  <link href="css/normalize.css" rel="stylesheet">
+  <link href="css/enstyle.css" rel="stylesheet">
+  <link href="css/newStyle.css" rel="stylesheet">
+  <!-- Fonts -->
+  <!-- Open Sans for body font -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+ 
+  <script type="text/javascript">
+    $(document).ready(function () {
+      /*
+       *  Simple image gallery. Uses default settings
+       */
+      $('.fancybox').fancybox();
+      /*
+       *  Different effects
+       */
+      // Change title type, overlay closing speed
+      $(".fancybox-effects-a").fancybox({
+        helpers: {
+          title: {
+            type: 'outside'
+          },
+          overlay: {
+            speedOut: 0
+          }
+        }
+      });
+      // Disable opening and closing animations, change title type
+      $(".fancybox-effects-b").fancybox({
+        openEffect: 'none',
+        closeEffect: 'none',
+        helpers: {
+          title: {
+            type: 'over'
+          }
+        }
+      });
+      // Set custom style, close if clicked, change title type and overlay color
+      $(".fancybox-effects-c").fancybox({
+        wrapCSS: 'fancybox-custom',
+        closeClick: true,
+        openEffect: 'none',
+        helpers: {
+          title: {
+            type: 'inside'
+          },
+          overlay: {
+            css: {
+              'background': 'rgba(238,238,238,0.85)'
+            }
+          }
+        }
+      });
+      // Remove padding, set opening and closing animations, close if clicked and disable overlay
+      $(".fancybox-effects-d").fancybox({
+        padding: 0,
+        openEffect: 'elastic',
+        openSpeed: 150,
+        closeEffect: 'elastic',
+        closeSpeed: 150,
+        closeClick: true,
+        helpers: {
+          overlay: null
+        }
+      });
+      /*
+       *  Button helper. Disable animations, hide close button, change title type and content
+       */
+      $('.fancybox-buttons').fancybox({
+        openEffect: 'none',
+        closeEffect: 'none',
+        prevEffect: 'none',
+        nextEffect: 'none',
+        closeBtn: false,
+        helpers: {
+          title: {
+            type: 'inside'
+          },
+          buttons: {}
+        },
+        afterLoad: function () {
+          this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this
+            .title :
+            '');
+        }
+      });
+      /*
+       *  Thumbnail helper. Disable animations, hide close button, arrows and slide to next gallery item if clicked
+       */
+      $('.fancybox-thumbs').fancybox({
+        prevEffect: 'none',
+        nextEffect: 'none',
+        closeBtn: false,
+        arrows: false,
+        nextClick: true,
+        helpers: {
+          thumbs: {
+            width: 50,
+            height: 50
+          }
+        }
+      });
+      /*
+       *  Media helper. Group items, disable animations, hide arrows, enable media and button helpers.
+       */
+      $('.fancybox-media')
+        .attr('rel', 'media-gallery')
+        .fancybox({
+          openEffect: 'none',
+          closeEffect: 'none',
+          prevEffect: 'none',
+          nextEffect: 'none',
+          arrows: false,
+          helpers: {
+            media: {},
+            buttons: {}
+          }
+        });
+      /*
+       *  Open manually
+       */
+      $("#fancybox-manual-a").click(function () {
+        $.fancybox.open('1_b.jpg');
+      });
+      $("#fancybox-manual-b").click(function () {
+        $.fancybox.open({
+          href: 'iframe.html',
+          type: 'iframe',
+          padding: 5
+        });
+      });
+      $("#fancybox-manual-c").click(function () {
+        $.fancybox.open([{
+          href: '1_b.jpg',
+          title: 'My title'
+        }, {
+          href: '2_b.jpg',
+          title: '2nd title'
+        }, {
+          href: '3_b.jpg'
+        }], {
+          helpers: {
+            thumbs: {
+              width: 75,
+              height: 50
+            }
+          }
+        });
+      });
+    });
+  </script>
+  <link href="css/flag-icon.css" rel="stylesheet">
+  <link href="css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+  <!--<script src="js/jquery.minimalTips.js"></script>-->
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $.minimalTips();
+    });
+  </script>
+  <script type='text/javascript' src='js/bootstrap.min.js'></script>
+  <script type='text/javascript'>
+    $(document).ready(function () {
+      if ($('.brands_slider').length) {
+        var brandsSlider = $('.brands_slider');
+        brandsSlider.owlCarousel({
+          loop: true,
+          autoplay: true,
+          autoplayTimeout: 5000,
+          nav: false,
+          dots: false,
+          autoWidth: true,
+          items: 8,
+          margin: 42
+        });
+        if ($('.brands_prev').length) {
+          var prev = $('.brands_prev');
+          prev.on('click', function () {
+            brandsSlider.trigger('prev.owl.carousel');
+          });
+        }
+        if ($('.brands_next').length) {
+          var next = $('.brands_next');
+          next.on('click', function () {
+            brandsSlider.trigger('next.owl.carousel');
+          });
+        }
+      }
+    });
+  </script>
+
+
+  <link rel="stylesheet" href="css/jquery.bxslider.css">
+  <script src="js/jquery.bxslider.min.js"></script>
+  <!-- // Initialize the slider -->
+  <script>
+    $(document).ready(function () {
+      $('.muhsliders').bxSlider();
+    });
+  </script>
+
+
+
+</head>
+
+<body>
+  <!-- Load Facebook SDK for JavaScript -->
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        xfbml: true,
+        version: 'v7.0'
+      });
+    };
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = 'https://connect.facebook.net/ar_AR/sdk/xfbml.customerchat.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    $(document).ready(function () {
+      $(".lang-flag").click(function () {
+        $(".language-dropdown").toggleClass("open");
+      });
+      $("ul.lang-list li").click(function () {
+        $("ul.lang-list li").removeClass("selected");
+        $(this).addClass("selected");
+        if ($(this).hasClass('lang-en')) {
+          $(".language-dropdown").find(".lang-flag").addClass("lang-en").removeClass("lang-es").removeClass(
+            "lang-pt");
+          $("#lang_selected").html("<p>EN</p>")
+        } else if ($(this).hasClass('lang-pt')) {
+          $(".language-dropdown").find(".lang-flag").addClass("lang-pt").removeClass("lang-es").removeClass(
+            "lang-en");
+          $("#lang_selected").html("<p>PT</p>")
+        } else {
+          $(".language-dropdown").find(".lang-flag").addClass("lang-es").removeClass("lang-en").removeClass(
+            "lang-pt");
+          $("#lang_selected").html("<p>ES</p>")
+        }
+        $(".language-dropdown").removeClass("open");
+      });
+    })
+  </script>
+  <!-- Your Chat Plugin code -->
+  <div class="fb-customerchat" attribution=setup_tool page_id="102470061498070">
+  </div>
+  <!-- Start menu area -->
+  <div class="nav-area">
+    <a id="menu-btn" href="#"><i class="fa fa-bars"></i></a>
+    <nav class="main-nav" id="main-menu">
+      <span class="fa fa-remove" id="close"></span>
+      <ul>
+        <li><a href="#header"><i class="fa fa-home"></i><span>Home</span></a></li>
+        <li><a href="#about"><i class="fa fa-building"></i><span>Introduction</span></a></li>
+        <li><a href="#instructions"><i class="fa fa-clipboard"></i><span>Features & Advantages</span></a></li>
+        <li><a href="#ai"><i class="fa fa-skyatlas"></i><span>Artificial intelligence</span></a></li>
+        <li><a href="#tcps"><i class="fa fa-copyright"></i><span>Terms and conditions</span></a></li>
+        <li><a href="#tsi"><i class="fa fa-bell-o"></i><span>Test Instructions</span></a></li>
+		        <li><a href="#StartFreeTest"><i class="fa fa-bell-o"></i><span>Start Your Test Now</span></a></li>
+        <li><a href="#booking"><i class="fa fa-credit-card-alt"></i><span>Booking a Test</span></a></li>
+        <li><a href="#howit-works"><i class="fa fa-hand-o-down"></i><span>How to Use</span></a></li>
+        <li><a href="#remote-tests"><i class="fa fa-eye"></i><span>Distant Monitoring</span></a></li>
+        <li><a href="#download-app"><i class="fa fa-download"></i><span>Download</span></a></li>
+		        <li><a href="#werty"><i class="fa fa-check"></i><span> Validate the Result</span></a></li>
+        <li><a href="#locations"><i class="fa fa-map-marker"></i><span>Accredited Centers</span></a></li>
+        <li><a href="#contact-sec"><i class="fa fa-phone"></i><span>Contact US</span></a></li>
+      </ul>
+    </nav>
+  </div>
+  <!-- End menu area -->
+  <!-- Start header section -->
+  <header id="header">
+
+    <div class="container">
+      <div class="row">
+
+
+        <div class="col-md-12 ">
+
+
+          <div class="langwebsite">
+            <a href="ar/index.html" target="_self">
+              <span>عـربـى</span>
+            </a>
+          </div>
+
+          <div class="topbtns-box">
+            <div class="clientlogo">
+              <img src="images/ClientLogo-w.png" alt="logo">
+            </div>
+
+            <a class="topbtns" href="https://utest_reg.eexam.uk/" target="_blank">
+              <i class="fa fa-user"></i>Create an account
+
+            </a>
+            <a class="topbtns topbtnTwo" href="https://utest_reg.eexam.uk/booking/index" target="_blank">
+              <i class="fa fa-ticket"></i> Make an appointment
+            </a>
+
+
+            <!-- // Slider HTML (change this to your own!) -->
+          <!--  <div class="muhsliders">
+              <div><img src="images/muhsliders/01.jpg" alt="utest images"></div>
+              <div><img src="images/muhsliders/02.jpg" alt="utest images"></div>
+              <div><img src="images/muhsliders/03.jpg" alt="utest images"></div>
+              <div><img src="images/muhsliders/04.jpg" alt="utest images"></div>
+              <div><img src="images/muhsliders/05.jpg" alt="utest images"></div>
+            </div>-->
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+
+  </header>
+  <!-- End header section -->
+  <!-- Start About -->
+  <section id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title-area wow fadeInLeft">
+            <h2 class="title">Introduction</h2>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <p>
+            UTEST is an integrated electronic testing platform designed to manage high capacity tests that require a
+            high level of monitoring and security. It operates through authorized test centers across 70 countries. In
+            addition, it provides home exams and distant exams while conforming to the international standards for
+            monitoring and quality. <br> <br>
+            UTEST is designed using the cutting-edge technology and Artificial Intelligence to fulfill the needs of
+            bodies such as ministries, embassies, NGOs and corporations; and educational institutions such as, schools,
+            institutes, universities and training centers that mandate adherence to the international standards of
+            assessment and testing.
+
+          </p>
+          <div class="row about-img">
+            <div class="col-md-2 col-xs-6 right" style="text-align: center;">
+              <img src="images/targets/t01.png" style=" display: inline-block; " alt="eexam">
+              <h5>Companies</h5>
+            </div>
+            <div class="col-md-2 col-xs-6 right" style="text-align: center;">
+              <img src="images/targets/t02.png" style=" display: inline-block; " alt="eexam">
+              <h5>Schools</h5>
+            </div>
+            <div class="col-md-2 col-xs-6 right" style="text-align: center;">
+              <img src="images/targets/t03.png" style=" display: inline-block; " alt="eexam">
+              <h5>Educational Institutions</h5>
+            </div>
+            <div class="col-md-2 col-xs-6 right" style="text-align: center;">
+              <img src="images/targets/t04.png" style=" display: inline-block; " alt="eexam">
+              <h5>Governments</h5>
+            </div>
+            <div class="col-md-2 col-xs-6 right" style="text-align: center;">
+              <img src="images/targets/t05.png" style=" display: inline-block; " alt="eexam">
+              <h5>Universities</h5>
+            </div>
+            <div class="col-md-2 col-xs-6 right" style="text-align: center;">
+              <img src="images/targets/t06.png" style=" display: inline-block; " alt="eexam">
+              <h5> Embassies</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End about -->
+  <!-- Start Instructions -->
+  <section id="instructions">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title-area wow fadeInLeft">
+            <h2 class="title">Features and Advantages </h2>
+          </div>
+          <p>The UTest platform for electronic tests has many features and features that meet all the needs of certification providers and candidates, for example but not limited to (registration processes - user account management processes - electronic payment processes and reservation of session dates - verification of the identity of the examinees before and during the test), and in what Here are some of them:
+</p>
+        </div>
+        <div class="tooltipMuh">
+          <img class="image-towhom" src="images/savetime.png" alt="eexam">
+          <br>
+          <span class="span-towhom">Saving the times</span>
+          <div class="bottom">
+            <p> Saving the times wasted on the processes of marking and analyzing results, in addition to sharing
+              question banks feature.
+            </p>
+            <i></i>
+          </div>
+        </div>
+        <div class="tooltipMuh">
+          <img class="image-towhom" src="images/availability.png" alt="eexam">
+          <br>
+          <span class="span-towhom">Availability</span>
+          <div class="bottom">
+            <p> Availability to take tests 24/7 whether at home or through test centers worldwide.
+            </p>
+            <i></i>
+          </div>
+        </div>
+        <div class="tooltipMuh">
+          <img class="image-towhom" src="images/automatedmanagement.png" alt="eexam">
+          <br>
+          <span class="span-towhom">Automatic control</span>
+          <div class="bottom">
+            <p>Automatic control of the work cycle through the automated management feature that supports data
+              verification for all system users, checking efficiency of the test computer and its devices, and verifying
+              biometric data, creating and distributing test forms, auto-correction, etc...
+            </p>
+            <i></i>
+          </div>
+        </div>
+        <div class="tooltipMuh">
+          <img class="image-towhom" src="images/monitoring.png" alt="eexam">
+          <br>
+          <span class="span-towhom">Control and Insurance</span>
+          <div class="bottom">
+            <p> All data, communication channels and attachments are encrypted in addition to prevention of disallowed
+              programs and applications. <br>
+              Test taker’s data verification using artificial intelligence before and during the test (finger print –
+              face recognition – voice recognition – e-signature)
+            </p>
+            <i></i>
+          </div>
+        </div>
+        <div class="tooltipMuh">
+          <img class="image-towhom" src="images/analytics.png" alt="eexam">
+          <br>
+          <span class="span-towhom">Analytical reports</span>
+          <div class="bottom">
+            <p> Analytical reports of feedback, fixing settings of question banks such as complexity, guessing factors,
+              time allowed, etc... <br>
+              Reports on biometrical features and candidate’s interaction with questions and behavior throughout the
+              test session.
+
+            </p>
+            <i></i>
+          </div>
+        </div>
+        <div class="tooltipMuh">
+          <img class="image-towhom" src="images/02.png" alt="eexam">
+          <br>
+          <span class="span-towhom"> Assistive tools </span>
+          <div class="bottom">
+            <p> The platform also provides assistive tools such as notes, paint, calculator, dictionary, translator,
+              e-books, etc. so test takers can do without external tools.
+            </p>
+            <i></i>
+          </div>
+        </div>
+        <div class="tooltipMuh">
+          <img class="image-towhom" src="images/03.png" alt="eexam">
+          <br>
+          <span class="span-towhom">Multilanguage </span>
+          <div class="bottom">
+            <p>The platform provides multilanguage interface including, eastern languages.
+            </p>
+            <i></i>
+          </div>
+        </div>
+        <div class="tooltipMuh">
+          <img class="image-towhom" src="images/20.png" alt="eexam">
+          <br>
+          <span class="span-towhom"> User profile </span>
+          <div class="bottom">
+            <p> Controlling users’ data updates, in addition to automatic connection with bodies of concern.
+            </p>
+            <i></i>
+          </div>
+        </div>
+        <div class="tooltipMuh">
+          <img class="image-towhom" src="images/16.png" alt="eexam">
+          <br>
+          <span class="span-towhom"> Technical support </span>
+          <div class="bottom">
+            <p> Available technical support through our communication center, chat service, or email. Distant control
+              service through desktop sharing from inside of the system during the test.
+            </p>
+            <i></i>
+          </div>
+        </div>
+        <div class="tooltipMuh">
+          <img class="image-towhom" src="images/17.png" alt="eexam">
+          <br>
+          <span class="span-towhom">Vouchers </span>
+          <div class="bottom">
+            <p> Full control of creating test vouchers, expiry dates, sales, and tracking.
+            </p>
+            <i></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ai -->
+  <section id="ai">
+    <div class="ai-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <img src="images/ai-diagram.png">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Terms and conditions for performing the test -->
+  <section id="tcps">
+    <div class="container pv-wrapper">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title-area wow fadeInLeft">
+            <h2 class="title">Terms and conditions</h2>
+          </div>
+        </div>
+        <div id="enhancedNavigation">
+          <div class="row">
+            <div class="sectionPageNav">
+              <div class="row">
+                 <div class="col-md-3">
+                    <a href="#Test-takers" class="fancybox hoverstyle">
+                    <div class="f01"></div>
+                    </a>
+                    <div id="Test-takers" style="max-width:700px; display: none; text-align: justify; padding:5px">
+                          <h3 class="popup-heading">Test Environment Standards</h3>
+                          <div class="img-box" style="text-align: center;">
+                              <img src="images/imga01.jpg" class="img-fluid" alt="Terms and conditions">
+                          </div>
+                          <div class="text-box1">
+                            <h4><span style="font-size: 16px;"><i class="fa fa-square"></i></span>&nbsp;&nbsp;Computers and system requirements:</h4>
+                            <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Display adaptor (minimum resolution 1024 * 768</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Free Hard disk size 50 GB</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;RAM 2GB minimum.</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Sound proof headset and filtered Mic.</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Operating system (windows 7 - 8 - 10)</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Installing the following applications:</p>
+                              <p style="padding-left: 20px;"><span style="color: #336; font-size: 0.5em;"><i class="fa fa-circle"></i></span>&nbsp;&nbsp;Microsoft Silverlight</p>
+                              <p style="padding-left: 20px;"><span style="color: #336; font-size: 0.5em;"><i class="fa fa-circle"></i></span>&nbsp;&nbsp;Security patch</p>
+                              <p style="padding-left: 20px;"><span style="color: #336; font-size: 0.5em;"><i class="fa fa-circle"></i></span>&nbsp;&nbsp;Test Engine</p>
+                            </div>
+                          <div class="text-box1">
+                            <h4><span style="font-size: 16px;"><i class="fa fa-square"></i></span>&nbsp;&nbsp;Test environment:</h4>
+                            <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Spacious test site free from obstacles</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Test taker must be alone in the testing room</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;No test preparation materials are allowed in the testing room</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Test taker should sit down properly fitting the camera and should not leave the testing room during the test.</p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="#Procurement-training" class="fancybox hoverstyle">
+                    <div class="f02"></div>
+                    </a>
+                    <div id="Procurement-training" style="max-width:700px; display: none; text-align: justify; padding:5px">
+                        <h3 class="popup-heading">Test rescheduling and cancellation</h3>
+                        <div class="img-box" style="text-align: center;">
+                              <img src="images/imga03.jpg" class="img-fluid" alt="Test reschedule">
+                        </div>
+                        <div class="text-box1">
+                            <h4></h4>
+                            <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Rescheduling take place 48 hours before the test.</p>
+                            <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Extra fees apply to rescheduling depending on the conditions of the test.</p>
+                            <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Rescheduling and cancellation happen only through test taker’s personal account.</p>                                          
+                         </div>
+                      </div>
+                    </div>
+                  
+                    <div class="col-md-3">
+                      <a href="#Test-owners" class="fancybox hoverstyle">
+                        <div class="f03"></div>
+                        </a>
+                      <div id="Test-owners" style="max-width:700px; display: none; text-align: justify; padding:5px">
+                          <h3 class="popup-heading">What to do on the day of the test?</h3>
+                          <div class="img-box" style="text-align: center;">
+                              <img src="images/imga02.jpg" class="img-fluid" alt="">
+                          </div>
+                          <div class="text-box1">
+                            <h4><span style="font-size: 16px;"><i class="fa fa-square"></i></span>&nbsp;&nbsp;Taking a test at a test center:</h4>
+                            <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;Test taker should attend 30 minutes before the time of the test to complete the registration process.</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Test taker must bring a valid ID/ passport.</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Test taker should read and understand test instructions form carefully and sign it.</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Test taker must bring the voucher sent earlier via email after completing the payment.</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Test taker must bring the receipt sent earlier by email at scheduling the test</p>                    
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;Test taker should exhibit a cooperative attitude towards proctors and test admins regarding inspections of personal belonging and keeping them in lockers.</p>                                       
+                         </div>
+                         <div class="text-box1">
+                            <h4><span style="font-size: 16px;"><i class="fa fa-square"></i></span>&nbsp;&nbsp;When test is taken at home.</h4>
+                            <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Computer and devices should meet the required standards.</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Test instructions must be read carefully and understood</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;In case of technical issues, press help to get in contact with technical support</p> 
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;In case of any cheating attempts, copying or photographing the test, whether directly or indirectly, the test gets cancelled and test fees will not be refunded.</p> 
+                          </div>                          
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                      <a href="#Test-centers" class="fancybox hoverstyle">
+                      <div class="f04"></div>
+                      </a>
+                      <div id="Test-centers" style="max-width:700px; display: none; text-align: justify; padding:5px">
+                          <h3 class="popup-heading">Exam results and score reports</h3>
+                          <div class="img-box" style="text-align: center;">
+                              <img src="images/imga04.jpg" class="img-fluid" alt="">
+                          </div>
+                          <div class="text-box1">
+                            <h4></h4>
+                            <p><span style="color: #336; font-size: 1.2em"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Test takers automatically access the test results through their personal account on the platform. Other entities can also access the results through the platform.</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Test score reports use the candidate’s full name as spelled in the ID as registered; and in case of errors, contact technical support.</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Test forms are kept for quality and verification purposes; If your test form was by you or anyone else, the test results will be cancelled.</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Test results date: as soon as the test is finished, test takers can access their results through their personal accounts.</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Show test results: candidates can view their results and print it through their personal accounts.</p>                    
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Test results verification: Anyone can verify test score reports using a verification code.</p>                    
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Remarking: test forms are kept for remarking and verification purposes.</p>                    
+                         </div>
+                         <div class="text-box1">
+                            <h4><span style="font-size: 16px;"><i class="fa fa-square"></i></span>&nbsp;&nbsp;Database security:</h4>
+                            <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;Test score reports are withdrawn and cancelled in case of cheating or failure to abide by test instructions.</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Against photoshop fraud attempts.</p>
+                              <p><span style="color: #336; font-size: 1.2em;"><i class="fa fa-check"></i></span>&nbsp;&nbsp;Repeating the test partially.</p> 
+                          </div>                          
+                    </div>
+                  </div>
+  
+                                  
+                
+                <!-- Close .row -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+  </section>
+  <!-- Terms and conditions for performing the test -->
+  <!-- Test session instructions -->
+  <section id="tsi">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title-area wow fadeInLeft">
+            <h2 class="title">Test instructions</h2>
+          </div>
+          <p>Test proctor is authorized to end the test, hide test results or block the candidates account if the test
+            taker failed to abide by the following instructions:-
+          </p>
+          <div class="whattodoinexam">
+            <div class="whatbg">
+              <ol>
+                <li> Bring the original valid ID/ Passport.</li>
+                <li> Cooperate with proctors during the inspection process. </li>
+                <li> Sitting properly in front of the camera or wearing stuff that may hide his/ her face like a hat, a
+                  cap, headscarf or neqab (for women) </li>
+                <li> Using banned stuff such as: test preparation material, mobile phones, calculator or other digital
+                  or electronic devices. </li>
+                <li> Eating, drinking, smoking or side-talking during the test. </li>
+                <li> Leaving the testing room before ending the test or during breaks.</li>
+                <li>All attempts of copying questions or answers such as overhearing, recording, or communicating with
+                  others directly or indirectly. </li>
+              </ol>
+            </div>
+            <div class="clearfix20"></div>
+            <div class="notify">
+              <h3>Note</h3>
+              <p> In case of technical problems or power cut, the test will be resumed where it stopped while safely
+                keeping the remaining time, and test takers are not allowed to leave the room unless they have waited
+                for at least 30 minutes. Then the proctor will fill out the status report and then the test taker shall
+                decide whether to resume the test or repeat the test some other time for free.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+  </section>
+  <!-- Test session instructions -->
+  <!--          Slider Part      -->
+ <section id="sliderX">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12">
+                  <div id="carousel-sliderX" class="carousel slide" data-ride="carousel">
+
+                    <ol class="carousel-indicators">
+                      <li data-target="#carousel-sliderX" data-slide-to="0" class="active"></li>
+                      <li data-target="#carousel-sliderX" data-slide-to="1"></li>
+                      <li data-target="#carousel-sliderX" data-slide-to="2"></li>
+                    </ol>
+
+    
+    <div class="carousel-inner" role="listbox">
+      <div class="item active itemOne">
+        <img src="images/SliderPic/Utest_ad1350x380%20orange.jpg" alt="TOEFL">
+        <div class="carousel-caption">
+          <h2 class="animated bounceInRight" style="animation-delay: 1s">NOW !</h2>
+          <h3 class="animated bounceInRight" style="animation-delay: 2s">GET THE TOEFL EXAM</h3>
+          <h3 class="animated bounceInLeft" style="animation-delay: 3s">WHEREVER YOU ARE</h3>
+          <a class="link-areaX animated bounceInLeft" style="animation-delay: 4s" href="https://utestadmin.eexam.org/reg" target="_blank">REGISTER HERE</a>
+        </div>
+      </div>
+      <div class="item itemTwo">
+        <img src="images/SliderPic/Utest_ad1350x380%20green.jpg" alt="PLACEMENT">
+        <div class="carousel-caption d-md-block">
+          <h2 class="animated bounceInRight" style="animation-delay: 1s">NOW !</h2>
+          <h3 class="animated bounceInRight" style="animation-delay: 2s">GET THE PLACEMENT EXAM</h3>
+          <h3 class="animated bounceInLeft" style="animation-delay: 3s">WHEREVER YOU ARE</h3>
+          <a class="link-areaX animated bounceInLeft" style="animation-delay: 4s" href="https://utestadmin.eexam.org/reg" target="_blank">REGISTER HERE</a>
+        </div>
+      </div>
+      <div class="item itemThree">
+        <img src="images/SliderPic/Utest_ad1350x380%20green.jpg" alt="thirdbanner">
+        <div class="carousel-caption">
+          <h2 class="animated zoomIn" style="animation-delay: 1s">Now !</h2>
+          <h3 class="animated zoomIn" style="animation-delay: 2s">GET AL TANAL EXAM</h3>
+          <h3 class="animated zoomIn" style="animation-delay: 3s">WHEREVER YOU ARE</h3>
+            <a class="link-areaX animated bounceInLeft" style="animation-delay: 4s" href="https://utestadmin.eexam.org/reg" target="_blank">REGISTER HERE</a>
+        </div>
+      </div>
+
+    </div>
+
+
+
+<!--
+    <a class="left carousel-control" href="#carousel-sliderX" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-sliderX" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+-->
+
+  </div>
+              </div>
+          </div>          
+    </div> 
+     
+</section> 
+<!--     Slider End -->
+  <!-- Start Free Test -->
+ <!-- <section id="StartFreeTest">
+    <div class="StartFreeTest-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="title-area wow fadeInLeft">
+              <h2 class="title">
+                Start your test now
+              </h2>
+            </div>
+            <p class="StartFreeTest-p">
+              For a limited time, you can take the exam for free and get an international certificate
+            </p>
+          </div>
+          <div class="col-md-12">
+             Start download app content 
+            <div class="col-md-12">
+              <div class="download-app-content">
+                 Start PC download 
+                <a class="single-download wow fadeInLeft fancybox-media"
+                  href="https://youtu.be/BrCCxwujWHA?list=PLlqyf0oRt832vUGGlZUE_4j-615r073_v">
+                  <div class="download-icon">
+                    <i class="fa fa-user"></i>
+                  </div>
+                  <div class="download-content">
+                    <p>Step One</p>
+                    <span>Create an account
+                    </span>
+                  </div>
+                </a>
+                 Start PC download 
+                <a class="single-download wow fadeInLeft fancybox-media"
+                  href="https://youtu.be/BrCCxwujWHA?list=PLlqyf0oRt832vUGGlZUE_4j-615r073_v">
+                  <div class="download-icon">
+                    <i class="fa fa-download"></i>
+                  </div>
+                  <div class="download-content">
+                    <p>Step Two</p>
+                    <span>Download the app
+                    </span>
+                  </div>
+                </a>
+                 Start PC download 
+                <a class="single-download wow fadeInLeft fancybox-media"
+                  href="https://youtu.be/BrCCxwujWHA?list=PLlqyf0oRt832vUGGlZUE_4j-615r073_v">
+                  <div class="download-icon">
+                    <i class="fa fa-desktop"></i>
+                  </div>
+                  <div class="download-content">
+                    <p>Step Three</p>
+                    <span>Start the exam</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </section>-->
+  <!-- End how it works -->
+  <!-- test Booking -->
+  <section id="booking">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title-area wow fadeInLeft">
+            <h2 class="title">Booking a Test</h2>
+          </div>
+          <div class="clearfix"></div>
+          <div class="icons-container1">
+            <div class="col-md-5ths col-xs-6 div-bookexam right">
+              <img class="image-towhom" src="images/pay/centers.png" alt="eexam"><br>
+              <span class="span-towhom">Accredited centers
+              </span>
+            </div>
+            <div class="col-md-5ths col-xs-6 div-bookexam right">
+              <img class="image-towhom" src="images/pay/payonline.png" alt="eexam"><br>
+              <span class="span-towhom">Online payment
+              </span>
+            </div>
+            <div class="col-md-5ths col-xs-6 div-bookexam right">
+              <img class="image-towhom" src="images/pay/bank.png" alt="eexam"><br>
+              <span class="span-towhom">Bank deposit</span>
+            </div>
+            <div class="col-md-5ths col-xs-6 div-bookexam right">
+              <img class="image-towhom" src="images/pay/atm.png" alt="eexam"><br>
+              <span class="span-towhom"> ATM</span>
+            </div>
+            <div class="col-md-5ths col-xs-6 div-bookexam right">
+              <img class="image-towhom" src="images/pay/cardmachine.png" alt="eexam"><br>
+              <span class="span-towhom">Instant payment machines</span>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <p>Test booking vouchers can only be purchased through the platform’s website or the authorized test centers.
+            Payments can be made through credit cards, bank transfer or in cash in the test center.
+            Please check the following information:
+
+          </p>
+        </div>
+        <div class="col-md-12">
+          <div class="check-list">
+            <ul>
+              <li>1. All vouchers are valid for 12 months</li>
+              <li> 2. Expiration date of vouchers cannot be extended under any circumstances. </li>
+              <li>3. Tests should be scheduled and taken before voucher’s expiration </li>
+              <li> 4. Vouchers cannot be used more than once</li>
+              <li> 5. Vouchers cannot be refunded. Lost or stolen vouchers cannot be redeemed. </li>
+              <li> 6. Voucher’s information such the state, the currency, the test...etc. cannot be changed after
+                purchasing the voucher. </li>
+              <li>7. Tests expiry can replace voucher expiry date. </li>
+              <li> 8. Vouchers of retaken tests are only valid for the same test the candidate has failed. </li>
+              <li> 9. Test scores will be withdrawn if the candidate is proven to have used an unauthorized discount, or
+                promotion codes.</li>
+              <li> 10. The platform is not responsible for vouchers obtained by unauthorized distributors or by
+                fraudulence. </li>
+              <li> 11. In case of booking the test at a test center, extra fees will be charged depending on the
+                geographical region. </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-12 send-area">
+          <a class="download-btn" href="https://utest_reg.eexam.uk/Payment/Index" target="_blank">
+            <i class="fa fa-credit-card"></i> Book Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- test Booking -->
+  <!-- Start how it works -->
+  <section id="howit-works">
+    <div class="howit-works-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="title-area wow fadeInLeft">
+              <h2 class="title">
+                How to Use
+              </h2>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="howit-works-video">
+              <iframe width="560" height="280"
+                src="https://www.youtube.com/embed/videoseries?list=PLlqyf0oRt8335hKv0rHPv1OIXpbmn_Wfq" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+  <!-- End how it works -->
+  <!-- Start Icons -->
+  <section id="remote-tests">
+    <div class="download-overlay-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="title-area">
+              <h2 class="title">Distant Monitoring</h2>
+            </div>
+            <p>UTEST provides distant proctoring features using Artificial Intelligence to help candidates take their
+              tests at home, while maintaining the standards of quality and monitoring using features that fits all
+              clients such as:
+            </p>
+            <div class="row">
+              <div class="col-md-3 col-xs-6 right " style="text-align: center;">
+                <img src="images/t04.png" style=" display: inline-block; " alt="eexam">
+                <h5>
+                  Automated Proctor
+                </h5>
+              </div>
+              <div class="col-md-3 col-xs-6 right " style="text-align: center;">
+                <img src="images/t01.png" style=" display: inline-block; " alt="eexam">
+                <h5>
+
+                  Online Proctor
+                </h5>
+              </div>
+              <div class="col-md-3 col-xs-6 right " style="text-align: center;">
+                <img src="images/t03.png" style=" display: inline-block; " alt="eexam">
+                <h5>
+
+                  Help Desk
+                </h5>
+              </div>
+              <div class="col-md-3 col-xs-6 right " style="text-align: center;">
+                <img src="images/t02.png" style=" display: inline-block; " alt="eexam">
+                <h5>
+
+                  Live Streaming
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Icons -->
+    <!-- Start download app -->
+    <section id="download-app">
+      <div class="download-overlay-1">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="title-area wow fadeInUp">
+                <h2 class="title">Download</h2>
+              </div>
+            </div>
+            <!-- Start download app content -->
+            <div class="col-md-12">
+              <div class="download-app-content">
+                <!-- Start PC download -->
+                <a class="single-download wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.5s"
+                  href="https://utest.uk/step1">
+                  <div class="download-icon">
+                    <img class="silveright-icon" style="width: 49px;" src="images/SilverLight.png">
+                  </div>
+                  <div class="download-content">
+                    <p>Step 1 <i style="font-size:20px; margin-left:15px;" class="fa fa-download"></i></p>
+                    <span>Microsoft Silverlight</span>
+                  </div>
+                </a>
+                <!-- Start PC download -->
+                <a class="single-download wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.5s"
+                  href="https://utest.uk/step2">
+                  <div class="download-icon">
+                    <i class="fa fa-shield"></i>
+                  </div>
+                  <div class="download-content">
+                    <p>Step 2 <i style="font-size:20px; margin-left:15px;" class="fa fa-download"></i></p>
+                    <span>Security Patch</span>
+                  </div>
+                </a>
+                <!-- Start PC download -->
+                <a class="single-download wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.5s"
+                  href="https://utest.uk/step3">
+                  <div class="download-icon">
+                    <i class="fa fa-desktop"></i>
+                  </div>
+                  <div class="download-content">
+                    <p> Step 3 <i style="font-size:20px; margin-left:15px;" class="fa fa-download"></i> </p>
+                    <span>Test Engine</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End download app -->
+    <!-- Start getid -->
+    <section id="werty">
+      <div class="download-overlay2">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="title-area wow fadeInLeft">
+                <h2 class="title">Validate the Result</h2>
+              </div>
+              <div class="col-md-12">
+                <form method="post" action="" id="ctl00" class="contact-form8" runat="server">
+                  <input type="text" class="form-control8" required="" name="vcode" id="vcode"
+                    placeholder=" Enter the verification code like 258974631">
+                  <button class="send-btn8" type="submit" name="submit"> <i class="fa fa-check"></i> Verify </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    <!-- End FAQ -->
+    <!-- Start locations -->
+    <section id="locations">
+      <div class="download-overlay-1">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="title-area wow fadeInUp">
+                <h2 class="title">Accredited Centers</h2>
+              </div>
+            </div>
+          </div>
+          <div class="row center-content">
+            <div class="muhdropdown">
+			<button class="send-btn8 dropbtn" type="submit" name="submit"> Choose country</button>
+              
+              <div class="dropdown-content">
+                <a href="#">Egypt</a>
+                <a href="#">USA</a>
+                <a href="#">UAE</a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="mapouter">
+              <div class="gmap_canvas"><iframe width="100%" height="500px" id="gmap_canvas"
+                  src="https://maps.google.com/maps?q=united%20kingdom&t=&z=17&ie=UTF8&iwloc=&output=embed"
+                  frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a
+                  href="https://thevpndeal.com/nordvpn-coupon/">nordvpn coupon</a></div>
+              <style>
+                .mapouter {
+                  position: relative;
+                  text-align: right;
+                  height: 500px;
+                  width: 100%;
+                }
+
+                .gmap_canvas {
+                  overflow: hidden;
+                  background: none !important;
+                  height: 500px;
+                  width: 100%;
+                }
+              </style>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End FAQ -->
+    <!-- Start contact -->
+    <section id="contact-sec">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="title-area wow fadeInLeft">
+              <h2 class="title">Contact US</h2>
+            </div>
+          </div>
+          <div class="row content">
+            <!-- Start download app content -->
+            <div class="col-md-12">
+              <div class="download-app-content">
+                <!-- Start PC download -->
+                <a class="single-contact-new wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.5s"
+                  href="https://utest.uk/silverlight">
+                  <div class="download-icon">
+                    <img class="silveright-icon" src="images/mainhr.png">
+                  </div>
+                  <div class="download-content">
+                    <p>Times of Work</p>
+                    <span>9:00 AM - 6:00 PM</span>
+                  </div>
+                </a>
+                <!-- Start PC download -->
+                <a class="single-contact-new wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.5s"
+                  href="https://utest.uk/secpatch">
+                  <div class="download-icon">
+                    <img src="images/calendar.png" style="width: 49px;" />
+                  </div>
+                  <div class="download-content">
+                    <p>Workdays</p>
+                    <span>Monday - Friday
+                    </span>
+                  </div>
+                </a>
+                <!-- Start PC download -->
+                <a class="single-contact-new wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.5s"
+                  href="https://utest.uk/enginews">
+                  <div class="download-icon">
+                    <img src="images/northamerica-map.png">
+                  </div>
+                  <div class="download-content">
+                    <p>United State</p>
+                    <span>+13029900990</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="row content">
+              <!-- Start download app content -->
+              <div class="col-md-12">
+                <div class="download-app-content">
+                  <!-- Start PC download -->
+                  <a class="single-contact-new wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.5s"
+                    href="https://utest.uk/silverlight">
+                    <div class="download-icon">
+                      <img src="images/uk.png">
+                    </div>
+                    <div class="download-content">
+                      <p>United Kingdom
+                      </p>
+                      <span>+442038287040</span>
+                    </div>
+                  </a>
+                  <!-- Start PC download -->
+                  <a class="single-contact-new wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.5s"
+                    href="https://utest.uk/secpatch">
+                    <div class="download-icon">
+                      <img src="images/middleeast.png">
+                    </div>
+                    <div class="download-content">
+                      <p>UEA</p>
+                      <span>+971556048385</span>
+                    </div>
+                  </a>
+                  <!-- Start PC download -->
+                  <a class="single-contact-new wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.5s"
+                    href="https://utest.uk/enginews">
+                    <div class="download-icon">
+                      <img src="images/africa.png">
+                    </div>
+                    <div class="download-content">
+                      <p>Egypt</p>
+                      <span>+201211666800</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="contact-detail">
+                <address class="">
+                  <div class=" col-md-8 col-md-offset-2" style="margin-top: 30px;">
+                    <div id="contactFormArea" class="contact-area">
+                      <p class="conacttitle">To contact the management, fill out the following form</p>
+                      <form method="post" action="mail.php" id="ctl00" class="contact-form" runat="server">
+                        <div class="form-group">
+                          <input type="text" required="" name="name" id="txtName" class="form-control"
+                            placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                          <input type="tel" required="" name="tel" id="txtTel" class="form-control" placeholder="Phone">
+                        </div>
+                        <div class="form-group">
+                          <input type="email" required="" name="from" id="txtEmail" class="form-control"
+                            placeholder="E-mail">
+                        </div>
+                        <div class="form-group">
+                          <input type="text" required="" name="subject" id="txtSubject" class="form-control"
+                            placeholder="Subject">
+                        </div>
+                        <div class="form-group">
+                          <textarea name="message" required="" class="form-control" id="txtBody" rows="3"
+                            placeholder="Message"></textarea>
+                        </div>
+                        <div class="g-recaptcha" data-sitekey="6Ld94f4UAAAAAEFQIQYK_RiIpbry6JbM5Lh718pj">
+                        </div>
+                        <div class="send-area ">
+                          <button class="send-btn" type="submit" name="submit">
+                            <i class="fa fa-send"></i>
+                            Send
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                    <div id="contactFormAreaSuccedded" style="display:none;">
+                      <span class="MessageSccuedded"> شكرًا لك على إرسال بريد إلكتروني ، سيتصل بك فريقنا قريبًا!
+                      </span>
+                    </div>
+                  </div>
+                </address>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    <!-- End contact -->
+    <!-- Start clients app -->
+    <div id="clients">
+      <iframe src="images/partners/logo-slider.html" title=""></iframe>
+    </div>
+    <!-- @end #clients -->
+    <!-- Start footer -->
+    <footer id="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-text">
+            <div class="col-md-6">
+              <div class="footer-text">
+                <p>
+                  <a href="http://www.utest.uk">
+                    <img style=" padding-top: 5px;" src="images/utestLogo72x28.png" alt="NEN Logo">&nbsp;
+Copyright © 2020 National Education Network</a>
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <p class="policytxt">
+                <a class="fancybox" href="#footer-terms" title="Terms and conditions">Terms and conditions </a>
+                |
+                <a class="fancybox" href="#footer-IntellectualProperty" title="Intellectual Property">Intellectual Property</a>
+                |
+                <a class="fancybox" href="#footer-PrivacyPolicy" title="Privacy Policy">Privacy Policy
+</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- End -->
+    <div id="footer-terms" style="max-width:700px; display: none; text-align: justify; padding:5px">
+      <h2 style="text-align: center; color: black; text-decoration: underline;">Terms and conditions </h2>
+      <p>
+      <p dir="ltr">Subscribing to and using our website undermines some terms and conditions, and entering/ signing in to our website means you accept such terms and conditions here mentioned in this document. </p>
+      <p dir="ltr"><strong>You agree that your signing in and using this website is for legal purposes only and that you are fully responsible for adapting to and adhering to all the laws, rules, and regulations of using this website. Accordingly, you declare that you shall not </strong><strong>:</strong></p>
+      <p dir="ltr">
+      <ul dir="ltr" start="1">
+        <li dir="ltr">Use the website to engage in or support any action that is considered illegal or involving a violation of civil law. </li>
+        <li dir="ltr">Upload or publish any illegal materials that may involve discrimination, libel, or inappropriateness. 
+        </li>
+        <li dir="ltr">Use the website impersonating other persons/ parties. </li>
+        <li dir="ltr">Upload any content that contains viruses, trojans, or any computing codes, files or programs that may change or corrupt the operations of the website or any devices or programs owned by one of our users.  </li>
+        <li dir="ltr">Upload, send, insert or transmit any materials you are not legally entitled to.
+        </li>
+        <li dir="ltr">Change, edit, remove or corrupt any content on the website. </li>
+        <li dir="ltr">Obstruct the usual communication lines or channels no matter how.</li>
+        <li dir="ltr">Claim yourself as representative of any organization or institution you are not legally entitled to represent. </li>
+        <li dir="ltr">Publish, transmit or upload any advertising or promotional materials no matter what it is or how it looks.  </li>
+        <li dir="ltr">Disclose any confidential data that may hinder the intellectual property rights, or collect or save personal information about others. </li>
+      </ul>
+      </p>
+      <p dir="ltr" style="text-decoration: underline;"><strong>Registration </strong></p>
+      <p dir="ltr">Some areas of the website are only accessed to registered members; when you access them, you will be requested to provide information about you. You agree to declare that all the information you provide about yourself is true, complete and accurate and that you will NOT try to log in to the website using another person’s information. </p>
+      <p dir="ltr">The user is responsible for the confidentiality of his/ her personal information, their username and password used for logging in, and the company is not responsible for any loss or misuse of your username and password.  </p>
+      <p dir="ltr" style="text-decoration: underline;"><strong>Termination of Usage. </strong></p>
+      <p dir="ltr">We hold all rights in lights of what we consider appropriate to terminate of suspend your logging in and using the website without prior notice and for whatever reason that may violate the rules and regulations of this document or any other behavior that we may see as violating or harmful to others. In case of termination you will not have any rights to log back in to the website and we shall use all means to make this effective. </p>
+      <p style="text-decoration: underline;" dir="ltr"><strong>Related links</strong></p>
+      <p dir="ltr">Some of the links available on this website do not function through us and we have no authority over these websites. Besides, we do not review the contents of these websites or control it. We only provide them to make things easy for our users. It is probable that such website may have promotional content, yet this does not relate us to them in whatever form. Thus, when you access these websites, you subject to the terms and conditions of these websites. 
+      </p>
+      <p dir="ltr" style="text-decoration: underline;"><strong>The content</strong></p>
+      <p dir="ltr">We hold all rights to monitor any content uploaded or inserted by you- though we are not obliged to do so- and although we can not monitor all materials uploaded to the website, we hold the right (without conditions) to remove or delete any content that might violate the terms and conditions of this document. All the contents of this website are protected by law and by the international conventions in regard to the publishing rights of our authors, whether Egyptians, Arabs, or foreigners. </p>
+      <p dir="ltr" style="text-decoration: underline;"><strong>Payment and cancellation</strong></p>
+      <p dir="ltr"><strong>Payment:</strong>&nbsp;A client must finalize the payment of all due amounts before the activation of the services purchased. </p>
+      <p dir="ltr"><strong>Cancellation and refund:</strong>&nbsp;All payments in cash are non-refundable regardless of the reasons of terminating the contract.</p>
+      <p dir="ltr"><strong>Credit Card Information:</strong>&nbsp;Credit Card information shall not be saved, sold, shared or rented to any third party .</p>
+      <p style="text-decoration: underline;" dir="ltr"><strong>Miscellaneous</strong></p>
+      <p dir="ltr"><strong>Terms and Conditions Validity: </strong>&nbsp;In case of legal procedures under this agreement, a copy of this document of terms and conditions can be used in printed copy, and you hereby agree that the electronic version of this document is also valid, and you too agree that this document is a legal document and you accept adhering to its terms and abiding by its conditions.
+      </p>
+      <p style="text-decoration: underline;" dir="ltr"><strong>Compensation: </strong></p>
+      <p dir="ltr">You agree to pay all due amounts as compensation to the company, its employees, board of directors, agents and partners including the attorney’s fees as a result of violating the terms and conditions under this document. </p>
+      </p>
+    </div>
+    <div id="footer-PrivacyPolicy" style="max-width:700px; display: none; text-align: justify; padding:5px">
+      <h2 style="text-align: center; color: black; text-decoration: underline;">Privacy Policy</h2>
+      <p>
+      <p dir="ltr">The website is responsible for protecting the rights of all its visitors. We comply with the protection of sensitive information and this privacy policy document is prepared to announce the approach we follow in collecting or publishing information on this website. 
+      </p>
+      <p style="text-decoration: underline;" dir="ltr"><strong>Collecting and using electronic information</strong></p>
+      <p dir="ltr">
+      <ul dir="ltr">
+        <li dir="ltr">Our server works automatically on collecting your IP Address upon your visit to our website. Using your IP Address helps us diagnose problems and run the necessary statistics of the usage of the website, and we do NOT allow any parties external to our team to get information regarding your IP Address information</li>
+        <li dir="ltr">Upon your visit to our website, you may be requested to provide some of your ID information (name, address, etc...). All this information is necessary to complete your transactions. This information is kept confidential and will not be misused under no circumstances. In case you refuse to provide such information, you limit our ability to serve you, and in all cases, we shall continue to invite you to visit our website and benefit from the valuable information it provides. </li>
+      </ul>
+      </p>
+      <p style="text-decoration: underline;" dir="ltr"><strong>Personal information protection</strong></p>
+      <p dir="ltr">
+      <ul dir="ltr">
+        <li dir="ltr">No personal information is required upon your visit to our website unless you decide and under your consent, so we shall not use such information except to process your requests for information or services. Upon your usage of our website, you agree to these privacy policy terms. </li>
+        <li dir="ltr">We hold the right to apply in whole or in part any changes to these terms from time to time without a prior notice. If you continue to use our website after these changes, you agree and accept to adhere to these changes. </li>
+        <li dir="ltr">Your personal data will not be accessed to our team members except those who need to get access to it, and this information will not be available to others except when you agree and accept that. Moreover, this information will never be sold or exchanged with a third party without your prior consent.</li>
+      </ul>
+      </p>
+      <p style="text-decoration: underline;" dir="ltr"><strong>Safe Data Transfer </strong></p>
+      <p dir="ltr">Please be assured that this website is equipped with data security measures to protect your information. We encode all sensitive information (such as your personal information) or the information that needs to be protected as per the legal requirements. </p>
+      <p style="text-decoration: underline;" dir="ltr"><strong>Legal Reference</strong></p>
+      <ul dir="ltr">
+        <li dir="ltr">We hold the right to take all the necessary measures to protect the information provided on the website against loss or misuse to guarantee the privacy of the content, and we are not legally responsible for any harm you might encounter as a result to any privacy violation to the information you might have transferred or uploaded to the system.   </li>
+        <li dir="ltr">This Terms and Conditions Document shall be interpreted and enforced to the laws of the International Court of Justice (ICJ) </li>
+      </ul>
+      </p>
+    </div>
+    <div id="footer-IntellectualProperty" style="max-width:700px; display: none; text-align: justify; padding:5px">
+      <h2 style="text-align: center; color: black; text-decoration: underline;">Intellectual Property</h2>
+      <p>
+      <p dir="ltr">
+      <ul dir="ltr">
+        <li>The copy rights of UTEST Platform include the intellectual property rights, trademarks, author’s rights etc. of all materials available on the website and it is strictly forbidden to use, reuse, republish, or print any materials that contain information related to the intellectual property right mentioned on the website</li>
+        <li>The platform is not responsible under all circumstances for any direct or indirect, accidental or sequential, personal or exceptional harms that may result from using or misusing the website. </li>
+      </ul>
+      </p>
+      <p dir="ltr">
+      <ul dir="ltr">
+        <li dir="ltr">Links to other websites are provided on this website for help and support to users, and hence the user is only responsible for all their transaction on these websites, and UTEST is NOT responsible for these websites’ contents, nor for what users use it for, nor for any problems that may arise as a result of such transactions.
+        </li>
+      </ul>
+      </p>
+      </p>
+    </div>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+<!--    <script src="js/jquery-1.10.2.min.js"></script>-->
+ <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/carousels.js"></script>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  <!--Fancybox-->
+  <!-- Add jQuery library -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <!-- Add mousewheel plugin (this is optional) -->
+  <script type="text/javascript" src="fancybox/lib/jquery.mousewheel.pack.js?v=3.1.3"></script>
+  <!-- Add fancyBox main JS and CSS files -->
+  <script type="text/javascript" src="fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  <link rel="stylesheet" type="text/css" href="fancybox/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+  <!-- Add Button helper (this is optional) -->
+  <link rel="stylesheet" type="text/css" href="fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+  <script type="text/javascript" src="fancybox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+  <!-- Add Thumbnail helper (this is optional) -->
+  <link rel="stylesheet" type="text/css" href="fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+  <script type="text/javascript" src="fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+  <!-- Add Media helper (this is optional) -->
+  <script type="text/javascript" src="fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+    <!-- Bootstrap-->
+ <script type="text/javascript" src="js/modernizr.custom.29473.js"></script>
+
+    <script src="js/bootstrap.js"></script>
+    <!-- Slick Slider -->
+    <script type="text/javascript" src="js/slick.js"></script>
+    <!-- Wow animation -->
+    <script type="text/javascript" src="js/wow.js"></script>
+    <!-- Off-canvas Menu -->
+    <script src="js/classie.js"></script>
+    <!-- Custom js -->
+    <script type="text/javascript" src="js/custom.js"></script>
+    <!-- accordion js -->
+    <script type="text/javascript" src="js/accordion.js"></script>
+    <div id='whatsapp-chat' class='hide'>
+      <div class='header-chat'>
+        <div class='head-home'>
+          <h3>Welcome</h3>
+          <p>Choose one of our representatives below to chat on WhatsApp.</p>
+        </div>
+        <div class='get-new hide'>
+          <div id='get-label'></div>
+          <div id='get-nama'></div>
+        </div>
+      </div>
+      <div class='home-chat'>
+        <!-- Info Contact Start -->
+        <a class='informasi' href='javascript:void' title='Chat Whatsapp'>
+          <div class='info-avatar'><img
+              src='https://4.bp.blogspot.com/-X1Xs2iRKabY/XXWzkqQ-iDI/AAAAAAAAA5w/HSyhR0gIXvUzlAx5XgaZzmlrCJkTgrOFQCLcBGAs/s70/supportfemale.png' />
+          </div>
+          <div class='info-chat'>
+            <!-- <span class='chat-label'>Support</span> -->
+            <span class='chat-nama' style="margin-top: 15px;">Aya</span>
+          </div><span class='my-number'>+201020048388</span>
+        </a>
+        <!-- Info Contact End -->
+        <!-- Info Contact Start -->
+        <a class='informasi' href='javascript:void' title='Chat Whatsapp'>
+          <div class='info-avatar'><img
+              src='https://4.bp.blogspot.com/-X1Xs2iRKabY/XXWzkqQ-iDI/AAAAAAAAA5w/HSyhR0gIXvUzlAx5XgaZzmlrCJkTgrOFQCLcBGAs/s70/supportfemale.png' />
+          </div>
+          <div class='info-chat'>
+            <!-- <span class='chat-label'>Sales</span> -->
+            <span class='chat-nama' style="margin-top: 15px;">EMY</span>
+          </div><span class='my-number'>+201068827099</span>
+        </a>
+        <!-- Info Contact End -->
+        <!-- Info Contact Start -->
+        <a class='informasi' href='javascript:void' title='Chat Whatsapp'>
+          <div class='info-avatar'><img
+              src='https://2.bp.blogspot.com/-y6xNA_8TpFo/XXWzkdYk0MI/AAAAAAAAA5s/RCzTBJ_FbMwVt5AEZKekwQqiDNqdNQJjgCLcBGAs/s70/supportmale.png' />
+          </div>
+          <div class='info-chat'>
+            <!-- <span class='chat-label'>Sales</span> -->
+            <span class='chat-nama' style="margin-top: 15px;">TOM</span>
+          </div><span class='my-number'>+201222383029</span>
+        </a>
+        <!-- Info Contact End -->
+        <div class='blanter-msg'><span>UTC 9AM – 6PM MONDAY-SATURDAY</span>
+          &nbsp; </div>
+      </div>
+      <div class='start-chat hide'>
+        <div class='first-msg'><span></span>Hi! what can I do for you?</span></div>
+        <div class='blanter-msg'><textarea id='chat-input' placeholder='Write a response' maxlength='120'
+            row='1'></textarea>
+          <a href='javascript:void;' id='send-it'>send</a></div>
+      </div>
+      <div id='get-number'></div><a class='close-chat' href='javascript:void'>×</a>
+    </div>
+    <a class='blantershow-chat' href='javascript:void' title='Show Chat'><i class='fa fa-whatsapp'></i></a>
+    <script>
+      /* Whatsapp Chat Widget by www.idblanter.com */
+      $(document).on("click", "#send-it", function () {
+        var a = document.getElementById("chat-input");
+        if ("" != a.value) {
+          var b = $("#get-number").text(),
+            c = document.getElementById("chat-input").value,
+            d = "https://web.whatsapp.com/send",
+            e = b,
+            f = "&text=" + c;
+          if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) var d =
+            "whatsapp://send";
+          var g = d + "?phone=" + e + f;
+          window.open(g, '_blank')
+        }
+      }), $(document).on("click", ".informasi", function () {
+        document.getElementById("get-number").innerHTML = $(this).children(".my-number").text(), $(
+          ".start-chat,.get-new").addClass("show").removeClass("hide"), $(".home-chat,.head-home").addClass(
+            "hide").removeClass("show"), document.getElementById("get-nama").innerHTML = $(this).children(
+              ".info-chat").children(".chat-nama").text(), document.getElementById("get-label").innerHTML = $(this)
+                .children(".info-chat").children(".chat-label").text()
+      }), $(document).on("click", ".close-chat", function () {
+        $("#whatsapp-chat").addClass("hide").removeClass("show")
+      }), $(document).on("click", ".blantershow-chat", function () {
+        $("#whatsapp-chat").addClass("show").removeClass("hide")
+      });
+    </script>
+
+
+</body>
+
+</html>
